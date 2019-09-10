@@ -30,12 +30,14 @@ brew install tesseract
 
 ## Go Get & Run
 
+If you have tesseract-ocr and library files on your machine  
+
 ```sh
+% go get github.com/otiai10/ocrserver/...
 % go get github.com/jou66jou/go-orcnums-xy
+% cd $GOPATH/github.com/jou66jou/go-orcnums-xy
 % go run main.go -p 8080
 ```  
-
-Need install tesseract if you run in local.  
 
 ## or Ready-Made Docker Image
 

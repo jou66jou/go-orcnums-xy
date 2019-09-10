@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -8,14 +9,15 @@ import (
 
 	"github.com/otiai10/marmoset"
 
-	"github.com/otiai10/ocrserver/controllers"
-	"github.com/otiai10/ocrserver/filters"
+	"github.com/jou66jou/go-orcnums-xy/controllers"
+	"github.com/jou66jou/go-orcnums-xy/filters"
 )
 
 var logger *log.Logger
+var port = flag.String("p", "8080", "server port")
 
 func main() {
-
+	flag.Parse()
 	marmoset.LoadViews("./app/views")
 
 	r := marmoset.NewRouter()
@@ -30,12 +32,12 @@ func main() {
 	logger = log.New(os.Stdout, fmt.Sprintf("[%s] ", "ocrserver"), 0)
 	r.Apply(&filters.LogFilter{Logger: logger})
 
-	port := os.Getenv("PORT")
-	if port == "" {
+	// port := os.Getenv("PORT")
+	if port == nil {
 		logger.Fatalln("Required env `PORT` is not specified.")
 	}
-	logger.Printf("listening on port %s", port)
-	if err := http.ListenAndServe(":"+port, r); err != nil {
+	logger.Printf("listening on port %s", *port)
+	if err := http.ListenAndServe(":"+*port, r); err != nil {
 		logger.Println(err)
 	}
 }

@@ -1,4 +1,4 @@
-module github.com/otiai10/ocrserver
+module github.com/jou66jou/go-orcnums-xy
 
 go 1.12
 

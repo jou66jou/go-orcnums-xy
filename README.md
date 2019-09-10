@@ -21,18 +21,26 @@ test0.0.1版本可辨識圖片中井字型1到9的XY位置，但0需於7到9的�
 3. ...
 
 # Quick Start
-沒使用fork，因此未修改import路徑，只能先用docker起環境。
 
-## Clone to anywhere
+## Mac Install tesseract
 
 ```sh
-% git clone github.com/jou66jou/ocrserver/
+brew install tesseract
 ```
 
-## Ready-Made Docker Image
+## Go Get & Run
 
 ```sh
-% docker run -p 8080:8080 otiai10/ocrserver
+% go get github.com/jou66jou/go-orcnums-xy
+% go run main.go -p 8080
+```  
+
+Need install tesseract if you run in local.  
+
+## or Ready-Made Docker Image
+
+```sh
+% docker-compose up -d
 ```
 
 cf. [docker](https://www.docker.com/products/docker-toolbox)
@@ -40,5 +48,5 @@ cf. [docker](https://www.docker.com/products/docker-toolbox)
 ## Upload Test Image
 
 1. open http://localhost:8080
-2. upload test image in `./imagetest` folder 
+2. upload test image file in `./imagetest` folder 
 3. get json response

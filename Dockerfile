@@ -1,7 +1,6 @@
 FROM golang:1.12
 ENV GO111MODULE=on
 
-LABEL maintainer="otiai10 <otiai10@gmail.com>"
 
 RUN apt-get -qq update \
   && apt-get install -y \
@@ -13,10 +12,9 @@ RUN apt-get -qq update \
 RUN apt-get install -y \
   tesseract-ocr-jpn
 
-ADD . $GOPATH/src/github.com/otiai10/ocrserver
-WORKDIR $GOPATH/src/github.com/otiai10/ocrserver
+ADD . $GOPATH/src/github.com/jou66jou/go-orcnums-xy
+WORKDIR $GOPATH/src/github.com/jou66jou/go-orcnums-xy
 RUN go get ./...
 RUN go test -v github.com/otiai10/gosseract
 
-ENV PORT=8080
-CMD $GOPATH/bin/ocrserver
+CMD $GOPATH/bin/ocrserver -p 8080

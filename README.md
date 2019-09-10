@@ -33,7 +33,12 @@ test0.0.1版本可辨識圖片中井字型1到9的XY位置，但0需於7到9的�
 
 ```sh
 % docker run -p 8080:8080 otiai10/ocrserver
-# open http://localhost:8080
 ```
 
 cf. [docker](https://www.docker.com/products/docker-toolbox)
+
+## Upload Test Image
+
+1. open http://localhost:8080
+2. upload test image in `./imagetest` folder 
+3. get json response

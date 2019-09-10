@@ -10,9 +10,9 @@ test0.0.1版本僅辨識圖片中井字型1到9，且0於7到9的下方
 同水平中不可有重複數字。
 
 # 目前可辨別錯誤
-1. `find multiple same or shortage of numbers by y point line`
+1. `find multiple same or shortage of numbers by y point line`  
 圖片中鍵盤缺少或其他位置出現，123、456、789的三種數字組合。
-2. `not found number : 0`
+2. `not found number : 0`  
 0未被在數字789的底下找到。  
 
 ## TODO

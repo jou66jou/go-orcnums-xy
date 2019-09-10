@@ -6,8 +6,8 @@ fork origin: https://github.com/otiai10/ocrserver
 辨識圖片中井字型0~9的x,y位置。
 
 # 條件限制
-test0.0.1版本僅辨識圖片中井字型1~9，且0於7~9的下方  
-井字數字間高度需盡可能一致(可調整 rangeY變數)，且同水平中不可有重複數字。
+test0.0.1版本僅辨識圖片中井字型1到9，且0於7到9的下方  
+同水平中不可有重複數字。
 
 # 目前可辨別錯誤
 1. `find multiple same or shortage of numbers by y point line`

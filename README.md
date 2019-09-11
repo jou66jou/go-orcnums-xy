@@ -56,7 +56,90 @@ cf. [docker](https://www.docker.com/products/docker-toolbox)
 
 
 ## Result
-
+### Success example
 
 <div align=center><img width="30%" height="30%" src="https://github.com/jou66jou/go-orcnums-xy/blob/master/imagetest/success.jpg" alt="success case"/></div>
 
+### Response
+
+```json
+200 OK
+-----
+{
+	"result": {
+		"Nums": [
+			{
+				"N": 1,
+				"X1": 102,
+				"Y1": 1190,
+				"X2": 113,
+				"Y2": 122
+			},
+			{
+				"N": 2,
+				"X1": 316,
+				"Y1": 1190,
+				"X2": 337,
+				"Y2": 122
+			},
+			{
+				"N": 3,
+				"X1": 533,
+				"Y1": 1190,
+				"X2": 554,
+				"Y2": 122
+			},
+			{
+				"N": 4,
+				"X1": 97,
+				"Y1": 1362,
+				"X2": 120,
+				"Y2": 139
+			},
+			{
+				"N": 5,
+				"X1": 316,
+				"Y1": 1362,
+				"X2": 337,
+				"Y2": 139
+			},
+			{
+				"N": 6,
+				"X1": 533,
+				"Y1": 1362,
+				"X2": 554,
+				"Y2": 139
+			},
+			{
+				"N": 7,
+				"X1": 99,
+				"Y1": 1533,
+				"X2": 119,
+				"Y2": 156
+			},
+			{
+				"N": 8,
+				"X1": 316,
+				"Y1": 1532,
+				"X2": 337,
+				"Y2": 156
+			},
+			{
+				"N": 9,
+				"X1": 533,
+				"Y1": 1532,
+				"X2": 554,
+				"Y2": 156
+			},
+			{
+				"N": 0,
+				"X1": 316,
+				"Y1": 1704,
+				"X2": 337,
+				"Y2": 173
+			}
+		]
+	},
+	"version": "test0.0.1"
+}
+```

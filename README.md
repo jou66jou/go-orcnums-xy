@@ -3,7 +3,8 @@
 fork origin: https://github.com/otiai10/ocrserver
 
 # 與原版差異
-辨識圖片中井字型0~9的x,y位置。
+辨識圖片中井字型0~9位置，標準英文鍵盤排列的26個英文字母位置，
+`123`、`abc`的手機螢幕鍵盤切換語言位置。
 
 # 條件限制
 test0.0.1版本可辨識圖片中井字型1到9的XY位置，但0需要在7到9的下方，  
@@ -16,9 +17,9 @@ test0.0.1版本可辨識圖片中井字型1到9的XY位置，但0需要在7到9�
 0未被在數字789的底下找到。  
 
 ## TODO
-1. 789底下若有多個0
-2. 未確認井字X軸
-3. 未確認多個井字組合
+1. 數字鍵盤789底下若有多個0
+2. 數字鍵盤未確認井字X軸
+3. 數字鍵盤未確認多個井字組合
 4. ...
 
 # Quick Start
@@ -27,6 +28,17 @@ test0.0.1版本可辨識圖片中井字型1到9的XY位置，但0需要在7到9�
 
 ```sh
 brew install tesseract
+```
+
+**注意** : test0.0.3版本，tesseract需裝 3.05.01 version 
+```sh
+    git clone https://github.com/tesseract-ocr/tesseract.git
+    cd tesseract
+    git checkout 2158661
+    ./autogen.sh
+    ./configure
+    make
+    sudo make install
 ```
 
 ## Go Get & Run
@@ -56,7 +68,7 @@ cf. [docker](https://www.docker.com/products/docker-toolbox)
 
 
 ## Result
-### Success example
+### Success numbers example
 
 <div align=center><img width="30%" height="30%" src="https://github.com/jou66jou/go-orcnums-xy/blob/master/imagetest/success.jpg" alt="success case"/></div>
 

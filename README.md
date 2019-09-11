@@ -53,3 +53,10 @@ cf. [docker](https://www.docker.com/products/docker-toolbox)
 1. Open http://localhost:8080
 2. Upload test image file from `./imagetest` folder 
 3. Get json response!
+
+
+## Result
+
+
+<div align=center><img width="30%" height="30%" src="https://github.com/jou66jou/go-orcnums-xy/blob/master/imagetest/success.jpg" alt="success case"/></div>
+

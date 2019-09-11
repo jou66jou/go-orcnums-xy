@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -63,31 +62,47 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 	if langs := r.FormValue("languages"); langs != "" {
 		client.Languages = strings.Split(langs, ",")
 	}
-	// client.SetWhitelist("qwertyuiopasdfghjklzxcvbnm")
 	// if whitelist := r.FormValue("whitelist"); whitelist != "qwertyuiopasdfghjklzxcvbnm" {
 	// 	client.SetWhitelist(whitelist)
 	// }
 
-	var out string
-	out, err = client.HOCRText()
+	// 設定三種特定辨認名單並取得個別hOCR內容
+	var outNum, outEng, outSwitch string
+	client.SetWhitelist(ocrfind.GetNumWiteList())
+	outNum, err = client.HOCRText()
 	render.EscapeHTML = false
 	if err != nil {
 		errResp["error"] = err.Error()
 		render.JSON(http.StatusBadRequest, errResp)
 		return
 	}
-	fmt.Println(out)
-
+	client.SetWhitelist(ocrfind.GetEngWiteList())
+	outEng, err = client.HOCRText()
+	render.EscapeHTML = false
+	if err != nil {
+		errResp["error"] = err.Error()
+		render.JSON(http.StatusBadRequest, errResp)
+		return
+	}
+	client.SetWhitelist(ocrfind.GetSwitchWiteList())
+	outSwitch, err = client.HOCRText()
+	render.EscapeHTML = false
+	if err != nil {
+		errResp["error"] = err.Error()
+		render.JSON(http.StatusBadRequest, errResp)
+		return
+	}
 	// 取得OCRs
-	ocrs, err := ocrfind.NewOCRs(out)
+	ocrs, err := ocrfind.NewOCRs(outNum, outEng, outSwitch)
 	if err != nil {
 		errResp["error"] = err.Error()
 		render.JSON(http.StatusBadRequest, errResp)
 		return
 	}
 
-	// 抓出圖片井字型1~9與0的位置
+	// 抓出圖片中井字型1~9與0的位置
 	nums, nErr := ocrs.GetKeyboardNum()
+	// 抓出圖片中標準鍵盤26個字母位置
 	engs, eErr := ocrs.GetKeyboardEng()
 	if nErr != nil && eErr != nil {
 		errResp["error"] = nErr.Error() + "; " + eErr.Error()
@@ -98,7 +113,9 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 	var ocrsKeyboard ocrfind.OCRs
 	ocrsKeyboard.Nums = nums
 	ocrsKeyboard.Engs = engs
+	// TODO:未確認左下角位置
 	ocrsKeyboard.Switch = ocrs.Switch
+
 	render.JSON(http.StatusOK, map[string]interface{}{
 		"result":  ocrsKeyboard,
 		"version": version,

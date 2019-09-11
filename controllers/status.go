@@ -6,7 +6,7 @@ import (
 	"github.com/otiai10/marmoset"
 )
 
-const version = "test0.0.2"
+const version = "test0.0.3"
 
 // Status ...
 func Status(w http.ResponseWriter, r *http.Request) {

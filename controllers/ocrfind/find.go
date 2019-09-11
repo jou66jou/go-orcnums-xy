@@ -35,7 +35,7 @@ type Points struct {
 }
 
 var (
-	RangeY = 10 // 寬容水平座標的差值
+	RangeY = 15 // 寬容水平座標的差值
 	numInt = map[string]int{
 		"o": 0, // 英文字母小寫o
 		"O": 0, // 英文字母大寫O
@@ -77,14 +77,40 @@ var (
 		'x': 23,
 		'y': 24,
 		'z': 25,
+		'A': 0,
+		'B': 1,
+		'C': 2,
+		'D': 3,
+		'E': 4,
+		'F': 5,
+		'G': 6,
+		'H': 7,
+		'I': 8,
+		'J': 9,
+		'K': 10,
+		'L': 11,
+		'M': 12,
+		'N': 13,
+		'O': 14,
+		'P': 15,
+		'Q': 16,
+		'R': 17,
+		'S': 18,
+		'T': 19,
+		'U': 20,
+		'V': 21,
+		'W': 22,
+		'X': 23,
+		'Y': 24,
+		'Z': 25,
 	}
 )
 
-// query與解析hORC的標準內容
-func NewOCRs(hORC string) (OCRs, error) {
+// query與解析hOCR的標準內容
+func NewOCRs(outNum, outEng, outSwitch string) (OCRs, error) {
 	var ocrs = OCRs{}
 
-	dom, err := goquery.NewDocumentFromReader(strings.NewReader(hORC))
+	dom, err := goquery.NewDocumentFromReader(strings.NewReader(outNum))
 	if err != nil {
 		return ocrs, err
 	}
@@ -100,18 +126,36 @@ func NewOCRs(hORC string) (OCRs, error) {
 			}
 		}
 
+	})
+
+	dom, err = goquery.NewDocumentFromReader(strings.NewReader(outEng))
+	if err != nil {
+		return ocrs, err
+	}
+	dom.Find("span").Each(func(i int, selection *goquery.Selection) {
+		t := selection.Text()
 		// 單一字母
-		_, ok = charInt[rune(t[0])]
-		if ok {
-			title, exis := selection.Attr("title")
-			if exis {
-				e := getEng(title, t)
-				ocrs.Engs = append(ocrs.Engs, e)
+		if len(t) == 1 {
+			_, ok := charInt[rune(t[0])]
+			if ok {
+				title, exis := selection.Attr("title")
+				if exis {
+					e := getEng(title, t)
+					ocrs.Engs = append(ocrs.Engs, e)
+				}
 			}
 		}
+	})
+
+	dom, err = goquery.NewDocumentFromReader(strings.NewReader(outSwitch))
+	if err != nil {
+		return ocrs, err
+	}
+	dom.Find("span").Each(func(i int, selection *goquery.Selection) {
+		t := selection.Text()
 
 		// 取得switch鍵
-		if t == "123" {
+		if t == "123" || t == "abc" {
 			title, exis := selection.Attr("title")
 			if exis {
 				sw := getSwitch(title, t)
@@ -120,4 +164,16 @@ func NewOCRs(hORC string) (OCRs, error) {
 		}
 	})
 	return ocrs, nil
+}
+
+func GetNumWiteList() string {
+	return "1234567890"
+}
+
+func GetEngWiteList() string {
+	return "qwertyuiopasdfghjklzxcvbnm"
+}
+
+func GetSwitchWiteList() string {
+	return "123abc"
 }

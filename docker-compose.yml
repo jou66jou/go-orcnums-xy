@@ -1,3 +1,5 @@
+# Dockerfile的Tesseract是最新版，辨識結果會有錯誤
+# test0.0.3尚在測試新版能否使用
 web:
   build: .
   dockerfile: Dockerfile
